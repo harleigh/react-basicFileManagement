@@ -4,6 +4,31 @@
 
 import { useState } from "react";
 
+/**
+ * Component returns a very basic table of each row of the cvs file 
+ */
+function PrettyDisplay({fileContents}){
+
+    if(fileContents===""){return;}
+        
+        const rows = fileContents.split('\n').map( (v,idx) => {
+            return ( 
+                <tr key={idx}>
+                    <th>{v}</th>
+                    
+                </tr>)
+            }
+        );
+
+        return (
+            <table>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+        )
+}
+
 
 /**
  * 
@@ -29,26 +54,7 @@ function FileAccess() {
         fileReader.readAsText(csvFileObj)
     }
 
-    const prettyDisplay = () => {
-        if(fileContents===""){return;}
-        
-        const rows = fileContents.split('\n').map( (v,idx) => {
-            return ( 
-                <tr key={idx}>
-                    {v}
-                </tr>)
-            }
-        );
-
-        console.log("Rows are: " + rows)
-
-        return (
-            <table>
-                {rows}
-            </table>
-        )
-    }
-
+   
     return(
         <>
             <h1>Accessing CSV Files</h1>
@@ -63,9 +69,10 @@ function FileAccess() {
             </div>
             <div>
                 <button onClick={onProcessCsvFile}> Process CSV File </button>
-                {prettyDisplay()}
             </div>
-            
+            <div>
+                <PrettyDisplay fileContents={fileContents}/>
+            </div>
         </>
     );
 }
