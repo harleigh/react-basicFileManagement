@@ -11,6 +11,10 @@ function PrettyDisplay({fileContents}){
 
     if(fileContents===""){return;}
         
+        /**
+         * Split each row by new line, then stick each entry into its own
+         * row--if we want to, later, we can make pretty columns too
+         */
         const rows = fileContents.split('\n').map( (v,idx) => {
             return ( 
                 <tr key={idx}>
@@ -27,11 +31,12 @@ function PrettyDisplay({fileContents}){
                 </tbody>
             </table>
         )
-}
+}//end pretty display
 
 
 /**
- * 
+ * Basic component lets you pick a single csv file out and then
+ * display the contents
  */
 function FileAccess() {
     const [csvFileObj, setCvsFileObj] = useState("");
@@ -75,6 +80,9 @@ function FileAccess() {
             </div>
         </>
     );
-}
+}//end file access component
+
+//later, we can break the file access into another component;
+// a parent that has a file component and a pretty display component
 
 export default FileAccess;
